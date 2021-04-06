@@ -1,11 +1,22 @@
 package StudentEnrolment;
 
-public class StudentEnrolment {
-    public static void main(String args[]) {
-        Course c1 = new Course("c001", "SADI", 12);
-        Student s1 = new Student("s001", "Minh", "1/1/2020");
+import java.util.ArrayList;
+import java.util.Scanner;
 
-        System.out.println(c1);
-        System.out.println(s1);
+public class StudentEnrolment implements StudentEnrolmentManager {
+
+    private ArrayList<StudentEnrolment>elist;
+
+    public StudentEnrolment(String student, String semester, String course) {
+        super();
+        this.student = courseName;
+        this.semester = courseID;
+        this.course= credits;
+        eList = new ArrayList<StudentEnrolment>();
+    }
+
+    @Override
+    public void add(){
+
     }
 }

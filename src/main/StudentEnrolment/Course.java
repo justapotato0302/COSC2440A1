@@ -30,7 +30,7 @@ public class Course {
         return cID;
     }
 
-    public ArrayList<Student> getsList() {
+    public ArrayList<Student> getStudentList() {
         return sList;
     }
 
