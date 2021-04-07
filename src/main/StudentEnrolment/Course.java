@@ -11,7 +11,7 @@ public class Course {
     public Course() {
         this.cName = "Default Course";
         this.cID = "c00";
-        this.credits= 0;
+        this.credits= 12;
     }
 
     public Course(String courseName, String courseID, int credits) {

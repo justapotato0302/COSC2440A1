@@ -4,19 +4,52 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentEnrolment implements StudentEnrolmentManager {
+    private String eID;
+    private String student;
+    private String semester;
+    private String course;
+    private ArrayList<StudentEnrolment>eList;
 
-    private ArrayList<StudentEnrolment>elist;
-
-    public StudentEnrolment(String student, String semester, String course) {
+    public StudentEnrolment(String eID, String student, String course, String semester) {
         super();
-        this.student = courseName;
-        this.semester = courseID;
-        this.course= credits;
-        eList = new ArrayList<StudentEnrolment>();
+        this.eID= eID;
+        this.student = student;
+        this.semester = semester;
+        this.course= course;
+        ArrayList<StudentEnrolment> eList = new ArrayList<StudentEnrolment>();
     }
+
+    public String getEnrolmentID() {
+        return eID;
+    }
+
+    public String getEnrolledCourse() {
+        return course;
+    }
+
+    public String getEnrolledStudent() {
+        return student;
+    }
+
+    public String getEnrolledSemester() {
+        return semester;
+    }
+
+    public ArrayList<StudentEnrolment> getEnrolmentList() {
+        return eList;
+    }
+
 
     @Override
-    public void add(){
-
+    public boolean add(StudentEnrolment enrolment){
+        //Check if the enrolment already existed on the system
+        if (eList.contains(enrolment)){
+            return false;
+        }
+        eList.add(enrolment);
+        enrolment.getEnrolmentList().add(this);
+        return true;
     }
+
+
 }

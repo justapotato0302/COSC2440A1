@@ -1,7 +1,7 @@
 package StudentEnrolment;
 
 public interface StudentEnrolmentManager {
-    public void add();
+    public boolean add(StudentEnrolment enrolment;
     public void delete();
     public void update();
     public void getOne();
