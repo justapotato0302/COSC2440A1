@@ -39,7 +39,6 @@ public class StudentEnrolment implements StudentEnrolmentManager {
         return eList;
     }
 
-
     @Override
     public boolean add(StudentEnrolment enrolment){
         //Check if the enrolment already existed on the system
@@ -47,9 +46,9 @@ public class StudentEnrolment implements StudentEnrolmentManager {
             return false;
         }
         eList.add(enrolment);
-        enrolment.getEnrolmentList().add(this);
         return true;
     }
+
 
 
 }
