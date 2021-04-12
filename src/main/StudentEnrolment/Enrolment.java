@@ -10,7 +10,7 @@ public class Enrolment implements StudentEnrolmentManager {
     private int credits;
     private String sID;
     private String birthdate;
-    private ArrayList<Enrolment>eList;
+    public ArrayList<Enrolment>eList;
 
     public Enrolment(String sID,String name, String birthdate ,String cID,String course, int credits, String semester) {
         super();
@@ -63,4 +63,6 @@ public class Enrolment implements StudentEnrolmentManager {
     public void add(Enrolment enrolment){
         eList.add(enrolment);
     }
+
+
 }
