@@ -99,13 +99,33 @@ public class EnrolmentSystem {
                     List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
                 }
             }
-            System.out.println("What do you want to do with this file (input 1-7): \n1.Add new data\n2.Update existed data\n3.Delete a data\n4.Print all courses for 1 student in 1 semester\n5.Print all students of 1 course in 1 semester\n6.Print all students of 1 course in 1 semester\n7.Quit");
-            userInput=myObj.nextLine();
-            //Add data
             while (quit == false) {
+                System.out.println("What do you want to do with this file (input 1-7): \n1.Add new data\n2.Update existed data\n3.Delete a data\n4.Print all courses for 1 student in 1 semester\n5.Print all students of 1 course in 1 semester\n6.Print all students of 1 course in 1 semester\n7.Quit");
+                userInput=myObj.nextLine();
+                //Add data
                 if (userInput.contains("1")) {
+                    System.out.println("Enter Student ID:");
+                    String sID = myObj.nextLine();
+                    System.out.println("Enter Student Name:");
+                    String sName = myObj.nextLine();
+                    System.out.println("Enter Student Birthdate:");
+                    String birth = myObj.nextLine();
+                    System.out.println("Enter Course ID:");
+                    String cID = myObj.nextLine();
+                    System.out.println("Enter Course Name:");
+                    String cName = myObj.nextLine();
+                    System.out.println("Enter Credits:");
+                    String sCredits = myObj.nextLine();
+                    System.out.println("Enter Semester for the enrolment:");
+                    String semester = myObj.nextLine();
+                    int credits = Integer.parseInt(sCredits);
 
-
+                    List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
+                    Enrolment e1 = new Enrolment(sID,sName,birth,cID,cName,credits,semester);
+                    enrolments = e1.add(enrolments,e1);
+                    for (Enrolment e : enrolments) {
+                        System.out.println(e);
+                    }
                 }
                 //Update data
                 if (userInput.contains("2")) {
@@ -130,7 +150,8 @@ public class EnrolmentSystem {
                 //Quit
                 if (userInput.contains("7")) {
                     quit = true;
-                } else {
+                }
+                else {
                     System.out.println("No operation found. Please input again!");
                     quit = true;
                 }

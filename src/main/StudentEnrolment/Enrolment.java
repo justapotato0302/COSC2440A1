@@ -1,6 +1,7 @@
 package StudentEnrolment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Enrolment implements StudentEnrolmentManager {
     private String name;
@@ -60,9 +61,9 @@ public class Enrolment implements StudentEnrolmentManager {
     public String toString() {
         return "[StudentID=" + sID + ", StudentName="+ name+", Birthdate="+birthdate+", CourseID=" + cID +", CourseName="+course+", Credits="+credits+ ", Semester=" + semester+ "]";
     }
-    public void add(Enrolment enrolment){
+    //get old list and new enrolment to add into new list
+    public List<Enrolment> add(List<Enrolment> eList ,Enrolment enrolment){
         eList.add(enrolment);
+        return eList;
     }
-
-
 }
