@@ -158,9 +158,9 @@ public class EnrolmentSystem {
                         String semester = myObj.nextLine();
                         //Update a row by following index
                         Enrolment e1 = new Enrolment(sID, sName, birth, cID, cName, Integer.parseInt(sCredits), semester);
-                        enrolments.set(Integer.parseInt(index), e1);
+                        e1.Update(enrolments, e1, Integer.parseInt(index));
 
-                        for (Enrolment e: enrolments){
+                        for (Enrolment e : enrolments) {
                             System.out.println(e);
                         }
 
@@ -200,29 +200,36 @@ public class EnrolmentSystem {
                         }
                         quit = true;
                     }
-                    //Delete data
-                    if (userInput.contains("3")) {
+                }
+                //Delete data
+                if (userInput.contains("3")) {
+                    List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
+                    System.out.println("Enter row number that you want to delete\nEnter row number:");
+                    userInput=myObj.nextLine();
+                    Enrolment e1 = enrolments.get(Integer.parseInt(userInput));
+                    enrolments = e1.Delete(enrolments,Integer.parseInt(userInput));
+                    for (Enrolment e : enrolments) {
+                        System.out.println(e);
+                    }
+                }
+                //Print all courses for 1 student in 1 semester
+                if (userInput.contains("4")) {
 
-                    }
-                    //Print all courses for 1 student in 1 semester
-                    if (userInput.contains("4")) {
+                }
+                //Print all students of 1 course in 1 semester
+                if (userInput.contains("5")) {
 
-                    }
-                    //Print all students of 1 course in 1 semester
-                    if (userInput.contains("5")) {
+                }
+                //Print all students of 1 course in 1 semester
+                if (userInput.contains("6")) {
 
-                    }
-                    //Print all students of 1 course in 1 semester
-                    if (userInput.contains("6")) {
-
-                    }
-                    //Quit
-                    if (userInput.contains("7")) {
-                        quit = true;
-                    } else {
-                        System.out.println("No operation found. Please input again!");
-                        quit = true;
-                    }
+                }
+                //Quit
+                if (userInput.contains("7")) {
+                    quit = true;
+                } else {
+                    System.out.println("No operation found. Please input again!");
+                    quit = true;
                 }
             }
         }

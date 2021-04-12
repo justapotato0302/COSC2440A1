@@ -101,4 +101,16 @@ public class Enrolment implements StudentEnrolmentManager {
     public void Update(List<Enrolment> eList,Enrolment enrolment,int index){
         eList.set(index,enrolment);
     }
+
+    public List<Enrolment> Delete(List<Enrolment> eList,int index){
+        Enrolment objToDel;
+        for (int i = 0;i < eList.size();i++){
+            if (i == index) {
+                objToDel = eList.get(index);
+                eList.remove(objToDel);
+            }
+        }
+        return eList;
+    }
+
 }
