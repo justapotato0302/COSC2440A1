@@ -52,31 +52,8 @@ public class EnrolmentSystem {
     public static void main(String args[]) {
         String userInput;
         String fileName;
-        Boolean stop = false;
         Boolean quit = false;
         Scanner myObj = new Scanner(System.in);
-        Student currentStudent;
-        Course currentCourse;
-        ArrayList<Student> AllStudent = new ArrayList<Student>();
-        ArrayList<Course> AllCourse = new ArrayList<Course>();
-        Course c1 = new Course("SADI", "c001", 12);
-        Student s1 = new Student("Minh", "s001", "1/1/2020");
-        Student s2 = new Student("Ben", "s002", "2/3/2020");
-
-        AllStudent.add(s1);
-        AllStudent.add(s2);
-        AllCourse.add(c1);
-
-        if (c1.enroll(s1)) {
-            System.out.println("Successfully enrolled");
-        } else {
-            System.out.println("Already in there");
-        }
-        if (c1.enroll(s2)) {
-            System.out.println("Successfully enrolled");
-        } else {
-            System.out.println("Already in there");
-        }
 
         while (quit == false) {
             //program starts and asks for enrolment file
@@ -98,7 +75,7 @@ public class EnrolmentSystem {
                 }
             }
             while (quit == false) {
-                System.out.println("What do you want to do with this file (input 1-7): \n1.Add new data\n2.Update existed data\n3.Delete a data\n4.Print all courses for 1 student in 1 semester\n5.Print all students of 1 course in 1 semester\n6.Print all students of 1 course in 1 semester\n7.Quit");
+                System.out.println("What do you want to do with this file (input 1-9): \n1.Add new data\n2.Update existed data\n3.Delete a data\n4.Print all courses for 1 student in 1 semester\n5.Print all students of 1 course in 1 semester\n6.Prints all courses offered in 1 semester\n7.Get one enrolment from the file\n8.Get all enrolment from the file\n9.Quit");
                 userInput = myObj.nextLine();
                 //Add data
                 if (userInput.contains("1")) {
@@ -175,7 +152,7 @@ public class EnrolmentSystem {
                             //Add a new line separator after the header
                             fileWriter.append(NEW_LINE_SEPARATOR);
 
-                            //Write a new student object list to the CSV file
+                            //Write a new list to the CSV file
                             for (Enrolment e : enrolments) {
                                 fileWriter.append(e.getEnrolledSID());
                                 fileWriter.append(COMMA_DELIMITER);
@@ -214,20 +191,203 @@ public class EnrolmentSystem {
                 }
                 //Print all courses for 1 student in 1 semester
                 if (userInput.contains("4")) {
+                    List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
+                    ArrayList<Enrolment> Courses = new ArrayList<Enrolment>();
+                    while (quit == false){
+                        System.out.println("Enter Student ID that you want to print: ");
+                        String sID =myObj.nextLine();
+                        System.out.println("Enter semester that you want to print: ");
+                        String semester =myObj.nextLine();
+                        for (Enrolment e:enrolments){
+                            //check if any row has the same input StudentID and Semester
+                            if (e.getEnrolledSemester().contains(semester) && e.getEnrolledSID().contains(sID)){
+                                Courses.add(e);
+                            }
+                        }
 
+                        //Check all courses for 1 student in 1 semester in the list
+                        for (Enrolment course : Courses) {
+                            System.out.println(course);
+                        }
+
+                        //List save as csv file
+                        FileWriter fileWriter = null;
+
+                        try {
+                            fileWriter = new FileWriter("AllCourses1S1S.csv");
+
+                            //Write the CSV file header
+                            fileWriter.append(FILE_HEADER.toString());
+
+                            //Add a new line separator after the header
+                            fileWriter.append(NEW_LINE_SEPARATOR);
+
+                            //Write a new list to the CSV file
+                            for (Enrolment enrol : Courses) {
+                                fileWriter.append(enrol.getEnrolledSID());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledSName());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledBirthdate());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledCID());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledCourse());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(String.valueOf(enrol.getEnrolledCredits()));
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledSemester());
+                                fileWriter.append(NEW_LINE_SEPARATOR);
+                            }
+                            System.out.println("CSV file was created successfully!");
+
+                        } catch (Exception e) {
+                            System.out.println("Error in CsvFileWriter!");
+                            e.printStackTrace();
+                        }
+                        quit = true;
+
+
+                    }
                 }
                 //Print all students of 1 course in 1 semester
                 if (userInput.contains("5")) {
+                    List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
+                    ArrayList<Enrolment> Students = new ArrayList<Enrolment>();
+                    while (quit == false) {
+                        System.out.println("Enter Course ID that you want to print: ");
+                        String cID = myObj.nextLine();
+                        System.out.println("Enter semester that you want to print: ");
+                        String semester = myObj.nextLine();
+                        for (Enrolment e : enrolments) {
+                            //check if any row has the same input CourseID and Semester
+                            if (e.getEnrolledSemester().contains(semester) && e.getEnrolledCID().contains(cID)) {
+                                Students.add(e);
+                            }
+                        }
 
+                        //Check all students for 1 course in 1 semester in the list
+                        for (Enrolment student : Students) {
+                            System.out.println(student);
+                        }
+
+                        //List save as csv file
+                        FileWriter fileWriter = null;
+
+                        try {
+                            fileWriter = new FileWriter("AllCourses1S1S.csv");
+
+                            //Write the CSV file header
+                            fileWriter.append(FILE_HEADER.toString());
+
+                            //Add a new line separator after the header
+                            fileWriter.append(NEW_LINE_SEPARATOR);
+
+                            //Write a new list to the CSV file
+                            for (Enrolment enrol : Students) {
+                                fileWriter.append(enrol.getEnrolledSID());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledSName());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledBirthdate());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledCID());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledCourse());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(String.valueOf(enrol.getEnrolledCredits()));
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledSemester());
+                                fileWriter.append(NEW_LINE_SEPARATOR);
+                            }
+                            System.out.println("CSV file was created successfully!");
+
+                        } catch (Exception e) {
+                            System.out.println("Error in CsvFileWriter!");
+                            e.printStackTrace();
+                        }
+                        quit = true;
+                    }
                 }
-                //Print all students of 1 course in 1 semester
+                //Prints all courses offered in 1 semester
                 if (userInput.contains("6")) {
+                    List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
+                    ArrayList<Enrolment> aSemester = new ArrayList<Enrolment>();
+                    while (quit == false) {
+                        System.out.println("Enter semester that you want to print: ");
+                        String semester = myObj.nextLine();
+                        for (Enrolment e : enrolments) {
+                            //check if any row has the same input Semester
+                            if (e.getEnrolledSemester().contains(semester)) {
+                                aSemester.add(e);
+                            }
+                        }
 
+                        //Check all Courses from 1 semester in the list
+                        for (Enrolment courses : aSemester) {
+                            System.out.println("CourseID:"+courses.getEnrolledCID());
+                            System.out.println("Course Name:"+courses.getEnrolledCourse());
+                            System.out.println("Credits:"+courses.getEnrolledCredits());
+                            System.out.println("Semester:"+courses.getEnrolledSemester());
+                            System.out.println("***************************************");
+
+                        }
+
+                        //List save as csv file
+                        FileWriter fileWriter = null;
+
+                        try {
+                            fileWriter = new FileWriter("AllCourses1S1S.csv");
+
+                            //Write the CSV file header
+                            fileWriter.append(FILE_HEADER.toString());
+
+                            //Add a new line separator after the header
+                            fileWriter.append(NEW_LINE_SEPARATOR);
+
+                            //Write a new Course list with corresponding semester to the CSV file
+                            for (Enrolment enrol : aSemester) {
+                                fileWriter.append(enrol.getEnrolledCID());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledCourse());
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(String.valueOf(enrol.getEnrolledCredits()));
+                                fileWriter.append(COMMA_DELIMITER);
+                                fileWriter.append(enrol.getEnrolledSemester());
+                                fileWriter.append(NEW_LINE_SEPARATOR);
+                            }
+                            System.out.println("CSV file was created successfully!");
+
+                        } catch (Exception e) {
+                            System.out.println("Error in CsvFileWriter!");
+                            e.printStackTrace();
+                        }
+                        quit = true;
+                    }
+                }
+                //get one enrolment from the file
+                if (userInput.contains("7")) {
+                    List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
+                    System.out.println("Please input a row that you want to print (start from 0):");
+                    String input = myObj.nextLine();
+                    Enrolment e = enrolments.get(Integer.parseInt(input));
+                    System.out.println(e);
+
+                    quit = true;
+                }
+                //get all enrolment from the file
+                if (userInput.contains("8")) {
+                    List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
+                    for (Enrolment e: enrolments){
+                        System.out.println(e);
+                    }
+                    quit = true;
                 }
                 //Quit
-                if (userInput.contains("7")) {
+                if (userInput.contains("9")) {
                     quit = true;
-                } else {
+                }
+                else {
                     System.out.println("No operation found. Please input again!");
                     quit = true;
                 }
