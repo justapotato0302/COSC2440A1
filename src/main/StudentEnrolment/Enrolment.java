@@ -24,40 +24,9 @@ public class Enrolment implements StudentEnrolmentManager {
         this.semester = semester;
         eList = new ArrayList<Enrolment>();
     }
-
-    public void setEnrolledSID(String sID) {
-        this.sID = sID;
-    }
-
-    public void setEnrolledName(String name) {
-        this.name = name;
-    }
-
-    public void setEnrolledBirthdate(String birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public void setEnrolledCID(String cID) {
-        this.cID=cID;
-    }
-
-    public void setEnrolledCourse(String course) {
-        this.course = course;
-    }
-
-    public void setEnrolledCredits(int credits) {
-        this.credits=credits;
-    }
-
-    public void setEnrolledSemester(String semester) {
-        this.semester = semester;
-    }
+    
     public String getEnrolledSID() {
         return sID;
-    }
-
-    public String getBirthdate() {
-        return birthdate;
     }
 
     public String getEnrolledCID() {

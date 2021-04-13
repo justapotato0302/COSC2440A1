@@ -1,7 +1,6 @@
 package StudentEnrolment;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-public class EnrolmentSystem {
+public class EnrolmentSystem{
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
     private static final String FILE_HEADER = "sID,Name,Birthdate,cID,Course,Credits,Semester";
@@ -45,7 +44,7 @@ public class EnrolmentSystem {
         String Course = metadata[4];
         int Credits = Integer.parseInt(metadata[5]);
         String Semester = metadata[6];
-        // create and return book of this metadata
+        // create and return enrolments of this metadata
         return new Enrolment(sID, name, Birthdate, cID, Course, Credits, Semester);
     }
 
@@ -60,6 +59,7 @@ public class EnrolmentSystem {
             System.out.println("Which enrolment file do you want to load (default.csv will be automatically loaded if no inputs): ");
             //load default.csv if no input
             fileName = myObj.nextLine();
+
             if (fileName.isEmpty()) {
                 List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
                 for (Enrolment e : enrolments) {
@@ -101,6 +101,7 @@ public class EnrolmentSystem {
                     for (Enrolment e : enrolments) {
                         System.out.println(e);
                     }
+                    quit = true;
                 }
                 //Update data
                 if (userInput.contains("2")) {
@@ -147,7 +148,7 @@ public class EnrolmentSystem {
                             fileWriter = new FileWriter("new1.csv");
 
                             //Write the CSV file header
-                            fileWriter.append(FILE_HEADER.toString());
+                            fileWriter.append(FILE_HEADER);
 
                             //Add a new line separator after the header
                             fileWriter.append(NEW_LINE_SEPARATOR);
@@ -192,7 +193,7 @@ public class EnrolmentSystem {
                 //Print all courses for 1 student in 1 semester
                 if (userInput.contains("4")) {
                     List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
-                    ArrayList<Enrolment> Courses = new ArrayList<Enrolment>();
+                    ArrayList<Enrolment> Courses = new ArrayList<>();
                     while (quit == false){
                         System.out.println("Enter Student ID that you want to print: ");
                         String sID =myObj.nextLine();
@@ -217,7 +218,7 @@ public class EnrolmentSystem {
                             fileWriter = new FileWriter("AllCourses1S1S.csv");
 
                             //Write the CSV file header
-                            fileWriter.append(FILE_HEADER.toString());
+                            fileWriter.append(FILE_HEADER);
 
                             //Add a new line separator after the header
                             fileWriter.append(NEW_LINE_SEPARATOR);
@@ -253,7 +254,7 @@ public class EnrolmentSystem {
                 //Print all students of 1 course in 1 semester
                 if (userInput.contains("5")) {
                     List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
-                    ArrayList<Enrolment> Students = new ArrayList<Enrolment>();
+                    ArrayList<Enrolment> Students = new ArrayList<>();
                     while (quit == false) {
                         System.out.println("Enter Course ID that you want to print: ");
                         String cID = myObj.nextLine();
@@ -278,7 +279,7 @@ public class EnrolmentSystem {
                             fileWriter = new FileWriter("AllCourses1S1S.csv");
 
                             //Write the CSV file header
-                            fileWriter.append(FILE_HEADER.toString());
+                            fileWriter.append(FILE_HEADER);
 
                             //Add a new line separator after the header
                             fileWriter.append(NEW_LINE_SEPARATOR);
@@ -312,7 +313,7 @@ public class EnrolmentSystem {
                 //Prints all courses offered in 1 semester
                 if (userInput.contains("6")) {
                     List<Enrolment> enrolments = readEnrolmentsFromCSV("C:\\Users\\admin\\IdeaProjects\\COSC2440A1\\src\\main\\StudentEnrolment\\default.csv");
-                    ArrayList<Enrolment> aSemester = new ArrayList<Enrolment>();
+                    ArrayList<Enrolment> aSemester = new ArrayList<>();
                     while (quit == false) {
                         System.out.println("Enter semester that you want to print: ");
                         String semester = myObj.nextLine();
@@ -340,7 +341,7 @@ public class EnrolmentSystem {
                             fileWriter = new FileWriter("AllCourses1S1S.csv");
 
                             //Write the CSV file header
-                            fileWriter.append(FILE_HEADER.toString());
+                            fileWriter.append(FILE_HEADER);
 
                             //Add a new line separator after the header
                             fileWriter.append(NEW_LINE_SEPARATOR);
@@ -372,7 +373,6 @@ public class EnrolmentSystem {
                     String input = myObj.nextLine();
                     Enrolment e = enrolments.get(Integer.parseInt(input));
                     System.out.println(e);
-
                     quit = true;
                 }
                 //get all enrolment from the file
